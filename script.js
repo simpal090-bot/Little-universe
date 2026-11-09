@@ -1,0 +1,37 @@
+// Vanilla JS interactions for the little universe.
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+for(let i=0;i<15&&!reduce;i++){let h=document.createElement('i');h.textContent=['♡','✧','♥'][i%3];h.style.left=Math.random()*100+'%';h.style.animationDuration=12+Math.random()*15+'s';h.style.animationDelay=Math.random()*-20+'s';h.style.fontSize=10+Math.random()*15+'px';$('#ambient').append(h)}
+function burst(n=10){if(reduce)return;for(let i=0;i<n;i++){let e=document.createElement('span');e.className='confetti';e.textContent=Math.random()>.35?'♥':'✦';e.style.left=Math.random()*100+'vw';e.style.color=['#e9a8c3','#c6a4d9','#f1c9d7'][i%3];e.style.fontSize=12+Math.random()*16+'px';e.style.animationDuration=1.6+Math.random()*1.2+'s';document.body.append(e);setTimeout(()=>e.remove(),3000)}}
+$('#enter').onclick=()=>{$('#welcome').classList.add('leave');$('#main').classList.remove('hidden');setTimeout(()=>$('#welcome').style.display='none',950);burst(18);setTimeout(()=>$('#letter').scrollIntoView({behavior:reduce?'auto':'smooth'}),650)};
+const music=$('#music');$('#musicBtn').onclick=async()=>{if(music.paused){try{await music.play();$('#musicBtn').innerHTML='♫ <span>Music on</span>'}catch{$('#musicBtn').innerHTML='♫ <span>Add music file</span>'}}else{music.pause();$('#musicBtn').innerHTML='♫ <span>Music off</span>'}};
+const letter=`Hey love,
+
+I don't know if I tell you enough, but I hope you never forget how special you are.
+
+You don't have to be perfect to be loved. You don't have to be happy every second. You don't have to hide your feelings or pretend that everything is okay.
+
+I love your little habits, your personality, your smile, your imperfections, and all the little things that make you YOU.
+
+Even on the days when you don't feel beautiful, I wish you could see yourself through my eyes.
+
+You're enough. You always have been.
+
+And I hope this little website reminds you of that whenever you need it.
+
+You deserve love, patience, kindness, reassurance, and happiness.
+
+Always remember that. ❤️`;
+let timer;function typeLetter(){clearInterval(timer);let t=$('#letterText');t.textContent='';if(reduce){t.textContent=letter;return}let i=0;timer=setInterval(()=>{t.textContent+=letter[i++];if(i>=letter.length)clearInterval(timer)},19)}typeLetter();$('#replay').onclick=typeLetter;
+const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}}),{threshold:.12});$$('.reveal').forEach(e=>observer.observe(e));
+$$('.feeling').forEach(b=>b.onclick=()=>{$('#feelingMessage').textContent='✧　'+b.dataset.message;$('#feelingMessage').animate([{opacity:.3,transform:'translateY(8px)'},{opacity:1,transform:'none'}],{duration:450})});
+const reasons=['Your beautiful smile.','The way you laugh.','Your cute little expressions.','Your kindness.','Your personality.','The way you make ordinary moments special.','Your voice.','Your existence.','The way you care.','Simply because you’re YOU.','How you make me smile without trying.','Your little habits.','Your thoughtful heart.','The sparkle in your eyes.','Your silly side.','The way you tell stories.','Your strength, even when you don’t notice it.','How you keep going.','Your softness.','Your honesty.','The comfort of talking to you.','Your random thoughts.','Your beautiful mind.','The way you make me feel at home.','Your laugh when something is really funny.','Your patience.','Your dreams.','Your curiosity.','The way you notice little things.','Your courage to be yourself.','Your warm heart.','Your sleepy voice.','Your excited voice.','The way you brighten a room.','Your imperfect, perfect self.','How you make distance feel smaller.','Your hugs.','Your little celebrations.','The way you try.','Your ability to care deeply.','Your unique way of seeing the world.','The memories we make.','The future we can dream about.','Your presence is a gift.','You make life sweeter.','You deserve all the gentleness in the world.','You are one of a kind.','You are more than enough.','There is nobody else quite like you.','Because loving you is my favourite thing.'];
+let pool=[...reasons],count=0;$('#reasonBtn').onclick=()=>{if(!pool.length)pool=[...reasons];let r=pool.splice(Math.floor(Math.random()*pool.length),1)[0];count++;$('#reasonCard').innerHTML=`♡<p>${r}</p><small>${Math.min(count,50)} / 50 little reminders${count>=50?' · all 50 revealed!':''}</small>`;$('#reasonCard').animate([{opacity:0,transform:'scale(.94) translateY(10px)'},{opacity:1,transform:'none'}],{duration:420});burst(5)};
+const qs=[{q:'How special are you to me?',a:['A. A little','B. Very','C. More than words can explain'],r:'Correct. There are not enough words in any language. ❤️'},{q:'What happens when you smile?',a:['A. Nothing','B. My day gets better','C. The entire universe becomes brighter'],r:'Exactly. Scientists are still studying your smile. ✨'},{q:'Do you need to be perfect to be loved?',a:['A. Yes','B. Absolutely not'],r:'Never. You are loved as a whole human, not a perfection project. 🫶'},{q:"What's my favourite version of you?",a:['A. When you’re happy','B. When you’re silly','C. Every version of you'],r:'Every. Single. Version. Even the sleepy, grumpy ones. 💗'},{q:"What's one thing you should never forget?",a:['A. You’re beautiful','B. You’re enough','C. You’re deeply appreciated'],r:'Trick question: all three are true. And then some. 🌷'}];
+let qi=0,answered=false;function render(){let q=qs[qi];answered=false;$('#qmeta').textContent=`QUESTION ${qi+1} OF 5`;$('#progress').style.width=(qi+1)*20+'%';$('#question').textContent=q.q;$('#feedback').textContent='';$('#next').disabled=true;$('#next').textContent=qi===4?'See my surprise ♡':'Next little question →';$('#answers').innerHTML='';q.a.forEach((a,i)=>{let b=document.createElement('button');b.className='answer';b.textContent=a;b.onclick=()=>{if(answered)return;answered=true;$$('.answer').forEach(x=>x.disabled=true);b.classList.add('selected');$('#feedback').textContent=q.r;$('#next').disabled=false};$('#answers').append(b)})}render();
+$('#next').onclick=()=>{if(!answered)return;if(qi<4){qi++;render()}else{$('#quiz').classList.add('hidden');$('#finish').classList.remove('hidden');burst(45)}};
+$('#restart').onclick=()=>{qi=0;$('#finish').classList.add('hidden');$('#quiz').classList.remove('hidden');render()};
+$('#hugBtn').onclick=()=>{$('#hugScene').classList.remove('hugging');void $('#hugScene').offsetWidth;$('#hugScene').classList.add('hugging');$('#hugMessage').textContent='Consider yourself hugged for as long as you need. ❤️';burst(12)};
+const modal=$('#modal');function close(){modal.classList.remove('open');modal.setAttribute('aria-hidden','true')}
+$$('.envelope').forEach(b=>b.onclick=()=>{$('#modalTitle').textContent=b.querySelector('b').textContent;$('#modalText').textContent=b.dataset.note;modal.classList.add('open');modal.setAttribute('aria-hidden','false');$('#close').focus()});$('#close').onclick=close;modal.onclick=e=>{if(e.target===modal)close()};document.onkeydown=e=>{if(e.key==='Escape')close()};
+for(let i=0;i<34;i++){let s=document.createElement('i');s.textContent='✦';s.style.cssText=`position:absolute;left:${Math.random()*100}%;top:${Math.random()*100}%;font-size:${6+Math.random()*9}px;color:#e8c6e3;opacity:${.2+Math.random()*.5};animation:twinkle ${2+Math.random()*4}s infinite`;$('#stars').append(s)}
