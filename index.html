@@ -1,31 +1,148 @@
-<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f8e8f0"><title>A Little Universe for You ♡</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;600;700&family=Playfair+Display:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="style.css"></head>
-<body><div class="ambient" id="ambient"></div>
-<div class="welcome" id="welcome"><div class="orbit"></div><div class="orbit two"></div><div class="welcome-box"><span class="eyebrow">a tiny universe, made with love</span><div class="moon">☾</div><h1>Hey, <em>Bhudiya.</em> ❤️</h1><p>Someone made a little corner of the internet<br> just for you.</p><button class="btn" id="enter">Open Your Little Universe ✨</button><small>Best experienced with your heart wide open.</small></div><footer>a little place to feel loved · always</footer></div>
-<header><a href="#top" class="brand">♡ our little universe</a><button id="musicBtn" class="music">♫ <span>Music off</span></button></header>
-<main id="main" class="hidden">
-<section class="hero wrap" id="top"><div class="hero-copy reveal"><span class="eyebrow">a reminder, whenever you need one</span><h2>This little world<br>has <em>your name</em><br>written in the stars.</h2><p>For the bright days, the quiet days, and every in-between kind of day. There's a soft place for you here.</p><a class="textlink" href="#letter">Come in, love ↓</a></div><div class="hero-art reveal"><div class="halo"></div><div class="heart">♥</div><i>✦</i><b>✧</b><small>you are<br>so loved</small><label>✿</label></div><div class="footnote">01 / a universe of little reminders</div></section>
-<section class="wrap section" id="letter"><div class="heading reveal"><span class="eyebrow">a note from my heart</span><h2>Something I Need<br><em>You to Know...</em></h2></div><article class="letter reveal"><div class="letter-top">✧　for your eyes only　✧</div><div id="letterText" class="letter-text"></div><div class="signature">Made with all my love, just for you.</div><button class="plain" id="replay">Read it again ↻</button></article></section>
-<section class="wrap section" id="feelings"><div class="heading reveal"><span class="eyebrow">for every version of you</span><h2>When you <em>feel...</em></h2><p>Pick the feeling that's visiting today. Let me remind you of something.</p></div><div class="feelings">
-<button class="feeling reveal" data-message="You don't need to compare yourself to anyone. There's something beautiful about you that nobody else can replicate. You're not competing with anyone, sweetheart."><span>🪞</span><b>Insecure</b><small>when you forget your magic</small></button>
-<button class="feeling reveal" data-message="Take a deep breath. You don't have to figure everything out right now. Your feelings matter, and you deserve patience and understanding."><span>☁️</span><b>Overthinking</b><small>when your mind feels loud</small></button>
-<button class="feeling reveal" data-message="It's okay not to be okay. You don't have to force a smile. Take your time. You deserve gentleness, especially on difficult days."><span>🌧️</span><b>Sad</b><small>when things feel heavy</small></button>
-<button class="feeling reveal" data-message="Imagine me giving you the biggest hug right now. Until I can do that in person, let this little corner remind you that you're loved."><span>💌</span><b>Missing me</b><small>when distance feels big</small></button>
-<button class="feeling reveal" data-message="Your efforts, your presence, your little gestures, and even the things you think nobody notices matter more than you know."><span>🌷</span><b>Unappreciated</b><small>when you need to be seen</small></button>
-<button class="feeling reveal" data-message="Breaking news: The prettiest girl in the universe has forgotten how ridiculously amazing she is. Please report to the mirror immediately. 😂❤️"><span>☀️</span><b>Need a smile</b><small>emergency cuteness delivery</small></button></div><div class="message" id="feelingMessage" aria-live="polite">✧　Choose a little card above, sweetheart.</div></section>
-<section class="reasons"><div class="wrap section center"><div class="heading reveal"><span class="eyebrow">a list that could go on forever</span><h2>50 Little Reasons Why<br><em>You're My Favourite Person</em></h2><p>One tiny reason at a time. There are at least a million more.</p></div><button id="reasonBtn" class="bigheart" aria-label="Reveal a random reason">♥<small>tap for a reason</small></button><div class="reason" id="reasonCard">♡<p>Your next little reason is waiting...</p><small>0 / 50 little reminders</small></div></div></section>
-<section class="wrap section" id="game"><div class="heading reveal"><span class="eyebrow">a very important quiz</span><h2>How Much Do You Know<br><em>About My Love for You?</em></h2><p>There are no wrong answers. But there are very cute ones.</p></div><div class="quiz reveal" id="quiz"><div class="progress"><span id="progress"></span></div><small id="qmeta">QUESTION 1 OF 5</small><h3 id="question"></h3><div id="answers"></div><p id="feedback" class="feedback"></p><button id="next" class="btn" disabled>Next little question →</button></div><div id="finish" class="finish hidden"><div>✦　✧　✦</div><h3>You did it, love!</h3><p>Congratulations! You've unlocked unlimited hugs, kisses, and forehead kisses. ❤️</p><button id="restart" class="plain">Play again ↻</button></div></section>
-<section class="hug-section"><div class="wrap center"><span class="eyebrow">a hug, delivered digitally</span><h2>Come here.<br><em>You need a hug.</em></h2><div class="hug-scene" id="hugScene"><div class="hugglow"></div><div class="hugheart">♥</div><div class="arm left"></div><div class="arm right"></div></div><button id="hugBtn" class="btn">Tap for a Hug 🫂</button><p id="hugMessage" class="hug-message">No explanations needed. Just come here.</p></div></section>
-<section class="wrap section" id="envelopes"><div class="heading reveal"><span class="eyebrow">little letters for later</span><h2>Open When <em>You Need Me</em></h2><p>Choose an envelope. It has a note waiting inside.</p></div><div class="envelopes">
-<button class="envelope reveal" data-note="If I could, I'd close the distance in a second and pull you into the safest, warmest hug. Until then, imagine my hand in yours. I'm cheering for you, always."><span>💌</span><b>you miss me</b><small>open this little letter</small></button>
-<button class="envelope reveal" data-note="Let your shoulders soften. Unclench your jaw. You don't have to solve tomorrow tonight. I hope your dreams are gentle and your sleep feels like a warm hug."><span>🌙</span><b>you can't sleep</b><small>open this little letter</small></button>
-<button class="envelope reveal" data-note="A bad day is not a bad life, and one difficult moment does not define you. Be kind to yourself tonight. You made it through today, and that counts."><span>🌧️</span><b>you're having a bad day</b><small>open this little letter</small></button>
-<button class="envelope reveal" data-note="Please don't measure your worth by a hard day, a mirror, or somebody else's opinion. You are a whole, wonderful person—not a list of things to fix."><span>🦋</span><b>you doubt yourself</b><small>open this little letter</small></button>
-<button class="envelope reveal" data-note="You can ask for reassurance. You can have feelings. You can need a little extra care. None of that makes you difficult to love."><span>🫶</span><b>you need reassurance</b><small>open this little letter</small></button>
-<button class="envelope reveal" data-note="Here's your reminder: you are thought of, appreciated, and loved in all the ordinary moments too. Not just when you're smiling. Not just when everything is easy."><span>💗</span><b>you want to feel loved</b><small>open this little letter</small></button></div></section>
-<section class="final"><div id="stars"></div><div class="final-content reveal"><span class="eyebrow">before you go...</span><h2>One Last Thing,<br><em>My Love...</em></h2><p>Out of all the people in this enormous world, I'm so grateful that our paths crossed.</p><p>I cannot promise that every day will be perfect, but I want us to keep choosing honesty, understanding, patience, and kindness.</p><p>Never feel like you have to earn your place in my heart by being perfect.</p><p>You are a person with feelings, dreams, insecurities, and imperfections — and every part of you deserves respect and care.</p><p>Whenever the world feels a little too heavy, come back here.</p><p class="reminder">YOU ARE LOVED.<br>YOU ARE VALUED.<br>YOU ARE ENOUGH. ❤️</p><div class="signoff">Forever your favourite notification. 💌</div><a href="#top" class="backtop">Back to our little universe ↑</a></div><footer>made of stardust, soft thoughts & a whole lot of love ♡</footer></section>
-</main>
-<div class="modal" id="modal" role="dialog" aria-modal="true" aria-hidden="true"><div class="modalbox"><button id="close" class="close" aria-label="Close">×</button><span class="modalicon">✉</span><span class="eyebrow">a little note, just for you</span><h3 id="modalTitle"></h3><p id="modalText"></p><div class="signature">always, with love ♡</div></div></div>
-<audio id="music" loop preload="none"><source src="gentle-music.mp3" type="audio/mpeg"></audio><script src="script.js"></script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The World of Her ♡</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Sparkle Container -->
+    <div id="sparkle-container"></div>
+
+    <!-- WELCOME SCREEN -->
+    <div id="welcome-screen">
+        <div class="glass-card welcome-card">
+            <h1>Welcome to your little universe! ♡</h1>
+            <p>A tiny, cute, and slightly spicy world made just for you.</p>
+            <div class="gif-container">
+                <!-- Peach and Goma Waving GIF -->
+                <img src="https://media.tenor.com/J332hI5VqLwAAAAj/peach-goma.gif" alt="Peach and Goma Waving" class="cute-gif float-anim">
+            </div>
+            <button id="enter-btn" class="btn-primary">ENTER MY LITTLE WORLD ♡</button>
+        </div>
+    </div>
+
+    <!-- TINY COMPANION WIDGET (Still our bunny mascot to guide her) -->
+    <div id="bunny-companion">
+        <div id="bunny-speech" class="hidden">Hewwooo!</div>
+        <div class="bunny-widget-svg">
+            <svg viewBox="0 0 100 100" class="bunny-svg float-anim">
+                <ellipse cx="35" cy="20" rx="8" ry="25" fill="#fff" transform="rotate(-15 35 20)" />
+                <ellipse cx="65" cy="20" rx="8" ry="25" fill="#fff" transform="rotate(15 65 20)" />
+                <circle cx="50" cy="55" r="30" fill="#fff" />
+                <path d="M55,15 L75,5 L65,25 Z" fill="#ff69b4" /><path d="M55,15 L75,25 L65,5 Z" fill="#ff69b4" /><circle cx="65" cy="15" r="4" fill="#ff1493" />
+                <circle cx="32" cy="58" r="5" fill="#ffd1dc" /><circle cx="68" cy="58" r="5" fill="#ffd1dc" />
+                <circle cx="40" cy="50" r="3.5" fill="#333" /><circle cx="60" cy="50" r="3.5" fill="#333" />
+                <path d="M46,56 Q50,60 54,56" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round"/>
+                <circle cx="35" cy="80" r="6" fill="#fff" />
+                <circle cx="65" cy="80" r="6" fill="#fff" />
+            </svg>
+        </div>
+    </div>
+
+    <!-- NAVIGATION -->
+    <nav id="navbar">
+        <a href="#home">🏠 Home</a>
+        <a href="#moods">🌸 Moods</a>
+        <a href="#games">🎮 Games</a>
+        <a href="#spicy">🌶️ Spicy</a>
+        <a href="#hugs">🧸 Hugs</a>
+    </nav>
+
+    <!-- MAIN APP CONTENT -->
+    <main id="main-content" class="hidden">
+        
+        <!-- HOME -->
+        <section id="home" class="glass-section">
+            <h1>Hey there, pretty girl! ✨</h1>
+            <p>Welcome to your personal playground.</p>
+            <div class="gif-container">
+                <img src="https://media.tenor.com/T0bH_7C0q-QAAAAj/peach-and-goma-peach-goma.gif" alt="Peach and Goma Cuddling" class="cute-gif">
+            </div>
+            <button id="bored-btn" class="btn-huge pulse">HELP! I'M BORED! 🚨</button>
+            <div id="bored-result" class="result-bubble hidden"></div>
+        </section>
+
+        <!-- MOOD STATION (Upgraded with dynamic Peach & Goma GIFs) -->
+        <section id="moods" class="glass-section">
+            <h2>What's the vibe today?</h2>
+            <div class="mood-grid">
+                <button class="mood-btn" data-mood="happy">🌸 Happy</button>
+                <button class="mood-btn" data-mood="sad">🥺 Sad</button>
+                <button class="mood-btn" data-mood="angry">😤 Angry</button>
+                <button class="mood-btn" data-mood="sleepy">🌙 Sleepy</button>
+            </div>
+            <div id="mood-result-card" class="glass-card hidden">
+                <img id="mood-gif" src="" alt="Mood GIF" class="cute-gif">
+                <p id="mood-text" class="result-bubble"></p>
+            </div>
+        </section>
+
+        <!-- SPICY CORNER 🌶️ (New Section) -->
+        <section id="spicy" class="glass-section spicy-section">
+            <h2>For Your Eyes Only 🌶️</h2>
+            <p>Feeling a little adventurous? Draw a spicy card...</p>
+            <div class="gif-container">
+                <img src="https://media.tenor.com/lM_qgP2L-fUAAAAj/peach-and-goma-peach-goma.gif" alt="Peach and Goma Kiss" class="cute-gif">
+            </div>
+            
+            <div class="spicy-card-container">
+                <div id="spicy-card" class="spicy-card">
+                    <div class="spicy-card-front">
+                        <h3>Draw a Card 🃏</h3>
+                        <p>(Tap to reveal)</p>
+                    </div>
+                    <div class="spicy-card-back">
+                        <h3 id="spicy-prompt">...</h3>
+                    </div>
+                </div>
+            </div>
+            <button id="next-spicy-btn" class="btn-primary hidden" style="margin-top: 20px;">Draw Another 🔥</button>
+        </section>
+
+        <!-- MINI GAME ARCADE -->
+        <section id="games" class="glass-section">
+            <h2>Mini Game Arcade 🎮</h2>
+            <div class="game-container">
+                <h3>Love Meter 💗</h3>
+                <button id="love-meter-btn" class="btn-secondary">Calculate Love</button>
+                <div class="progress-bar"><div id="love-fill"></div></div>
+                <p id="love-result"></p>
+            </div>
+        </section>
+
+        <!-- HUG SIMULATOR -->
+        <section id="hugs" class="glass-section">
+            <h2>Virtual Hug Station 🧸</h2>
+            <div id="hug-gif-container" class="hidden" style="margin-bottom: 20px;">
+                <img src="https://media.tenor.com/f_d_Jbb_2LMAAAAj/peach-and-goma-peach-goma.gif" alt="Peach and Goma Hug" class="cute-gif">
+            </div>
+            <button id="hug-btn" class="btn-huge">GIVE ME A HUG</button>
+            <p id="hug-message" class="hidden">Sending the squishiest hug ever! ♡</p>
+        </section>
+
+        <!-- LOVE CORNER -->
+        <section id="love" class="glass-section">
+            <h2>A little reminder... 💌</h2>
+            <p>Tap to open</p>
+            <div class="envelope-grid">
+                <div class="envelope" data-msg="I love you more than words can say. You're my favorite! 💕">
+                    <span>You miss me</span>
+                </div>
+                <div class="envelope" data-msg="Close your eyes, take a deep breath. I'm right here with you. 🌸">
+                    <span>You're stressed</span>
+                </div>
+                <div class="envelope" data-msg="You are literally the sexiest, cutest human alive. Fact. 🥵">
+                    <span>You need a boost</span>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
