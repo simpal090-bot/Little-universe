@@ -1,37 +1,194 @@
-// Vanilla JS interactions for the little universe.
-const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
-const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
-for(let i=0;i<15&&!reduce;i++){let h=document.createElement('i');h.textContent=['♡','✧','♥'][i%3];h.style.left=Math.random()*100+'%';h.style.animationDuration=12+Math.random()*15+'s';h.style.animationDelay=Math.random()*-20+'s';h.style.fontSize=10+Math.random()*15+'px';$('#ambient').append(h)}
-function burst(n=10){if(reduce)return;for(let i=0;i<n;i++){let e=document.createElement('span');e.className='confetti';e.textContent=Math.random()>.35?'♥':'✦';e.style.left=Math.random()*100+'vw';e.style.color=['#e9a8c3','#c6a4d9','#f1c9d7'][i%3];e.style.fontSize=12+Math.random()*16+'px';e.style.animationDuration=1.6+Math.random()*1.2+'s';document.body.append(e);setTimeout(()=>e.remove(),3000)}}
-$('#enter').onclick=()=>{$('#welcome').classList.add('leave');$('#main').classList.remove('hidden');setTimeout(()=>$('#welcome').style.display='none',950);burst(18);setTimeout(()=>$('#letter').scrollIntoView({behavior:reduce?'auto':'smooth'}),650)};
-const music=$('#music');$('#musicBtn').onclick=async()=>{if(music.paused){try{await music.play();$('#musicBtn').innerHTML='♫ <span>Music on</span>'}catch{$('#musicBtn').innerHTML='♫ <span>Add music file</span>'}}else{music.pause();$('#musicBtn').innerHTML='♫ <span>Music off</span>'}};
-const letter=`Hey love,
+:root {
+    --bg-pink: #ffe6ea;
+    --bg-lavender: #e6e6fa;
+    --bg-peach: #ffe5b4;
+    --primary-pink: #ff9cbd;
+    --spicy-red: #ff4b4b;
+    --text-dark: #5c4a52;
+    --glass-bg: rgba(255, 255, 255, 0.45);
+    --glass-border: rgba(255, 255, 255, 0.7);
+}
 
-I don't know if I tell you enough, but I hope you never forget how special you are.
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><text y='20' font-size='20'>✨</text></svg>"), auto;
+}
 
-You don't have to be perfect to be loved. You don't have to be happy every second. You don't have to hide your feelings or pretend that everything is okay.
+body {
+    font-family: 'Quicksand', sans-serif;
+    color: var(--text-dark);
+    background: linear-gradient(135deg, var(--bg-pink), var(--bg-lavender), var(--bg-peach));
+    background-attachment: fixed;
+    background-size: 300% 300%;
+    animation: gradientBG 15s ease infinite;
+    overflow-x: hidden;
+}
 
-I love your little habits, your personality, your smile, your imperfections, and all the little things that make you YOU.
+h1, h2, h3, h4 {
+    font-family: 'Fredoka One', cursive;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+    color: #ff6eb4;
+}
 
-Even on the days when you don't feel beautiful, I wish you could see yourself through my eyes.
+/* Glassmorphism Utilities */
+.glass-card, .glass-section {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 2px solid var(--glass-border);
+    border-radius: 25px;
+    padding: 30px;
+    box-shadow: 0 8px 32px rgba(255, 182, 193, 0.2);
+    text-align: center;
+    margin: 20px auto;
+    max-width: 600px;
+    width: 90%;
+    transition: transform 0.3s ease;
+}
 
-You're enough. You always have been.
+.glass-section:hover { transform: translateY(-5px); }
 
-And I hope this little website reminds you of that whenever you need it.
+/* GIF Styling */
+.gif-container {
+    margin: 15px 0;
+    display: flex;
+    justify-content: center;
+}
+.cute-gif {
+    border-radius: 20px;
+    max-width: 100%;
+    height: auto;
+    width: 250px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
 
-You deserve love, patience, kindness, reassurance, and happiness.
+/* Buttons */
+button {
+    font-family: 'Fredoka One', cursive;
+    border: none;
+    border-radius: 50px;
+    padding: 12px 25px;
+    font-size: 1rem;
+    transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+button:hover { transform: scale(1.1); }
+button:active { transform: scale(0.95); }
 
-Always remember that. ❤️`;
-let timer;function typeLetter(){clearInterval(timer);let t=$('#letterText');t.textContent='';if(reduce){t.textContent=letter;return}let i=0;timer=setInterval(()=>{t.textContent+=letter[i++];if(i>=letter.length)clearInterval(timer)},19)}typeLetter();$('#replay').onclick=typeLetter;
-const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}}),{threshold:.12});$$('.reveal').forEach(e=>observer.observe(e));
-$$('.feeling').forEach(b=>b.onclick=()=>{$('#feelingMessage').textContent='✧　'+b.dataset.message;$('#feelingMessage').animate([{opacity:.3,transform:'translateY(8px)'},{opacity:1,transform:'none'}],{duration:450})});
-const reasons=['Your beautiful smile.','The way you laugh.','Your cute little expressions.','Your kindness.','Your personality.','The way you make ordinary moments special.','Your voice.','Your existence.','The way you care.','Simply because you’re YOU.','How you make me smile without trying.','Your little habits.','Your thoughtful heart.','The sparkle in your eyes.','Your silly side.','The way you tell stories.','Your strength, even when you don’t notice it.','How you keep going.','Your softness.','Your honesty.','The comfort of talking to you.','Your random thoughts.','Your beautiful mind.','The way you make me feel at home.','Your laugh when something is really funny.','Your patience.','Your dreams.','Your curiosity.','The way you notice little things.','Your courage to be yourself.','Your warm heart.','Your sleepy voice.','Your excited voice.','The way you brighten a room.','Your imperfect, perfect self.','How you make distance feel smaller.','Your hugs.','Your little celebrations.','The way you try.','Your ability to care deeply.','Your unique way of seeing the world.','The memories we make.','The future we can dream about.','Your presence is a gift.','You make life sweeter.','You deserve all the gentleness in the world.','You are one of a kind.','You are more than enough.','There is nobody else quite like you.','Because loving you is my favourite thing.'];
-let pool=[...reasons],count=0;$('#reasonBtn').onclick=()=>{if(!pool.length)pool=[...reasons];let r=pool.splice(Math.floor(Math.random()*pool.length),1)[0];count++;$('#reasonCard').innerHTML=`♡<p>${r}</p><small>${Math.min(count,50)} / 50 little reminders${count>=50?' · all 50 revealed!':''}</small>`;$('#reasonCard').animate([{opacity:0,transform:'scale(.94) translateY(10px)'},{opacity:1,transform:'none'}],{duration:420});burst(5)};
-const qs=[{q:'How special are you to me?',a:['A. A little','B. Very','C. More than words can explain'],r:'Correct. There are not enough words in any language. ❤️'},{q:'What happens when you smile?',a:['A. Nothing','B. My day gets better','C. The entire universe becomes brighter'],r:'Exactly. Scientists are still studying your smile. ✨'},{q:'Do you need to be perfect to be loved?',a:['A. Yes','B. Absolutely not'],r:'Never. You are loved as a whole human, not a perfection project. 🫶'},{q:"What's my favourite version of you?",a:['A. When you’re happy','B. When you’re silly','C. Every version of you'],r:'Every. Single. Version. Even the sleepy, grumpy ones. 💗'},{q:"What's one thing you should never forget?",a:['A. You’re beautiful','B. You’re enough','C. You’re deeply appreciated'],r:'Trick question: all three are true. And then some. 🌷'}];
-let qi=0,answered=false;function render(){let q=qs[qi];answered=false;$('#qmeta').textContent=`QUESTION ${qi+1} OF 5`;$('#progress').style.width=(qi+1)*20+'%';$('#question').textContent=q.q;$('#feedback').textContent='';$('#next').disabled=true;$('#next').textContent=qi===4?'See my surprise ♡':'Next little question →';$('#answers').innerHTML='';q.a.forEach((a,i)=>{let b=document.createElement('button');b.className='answer';b.textContent=a;b.onclick=()=>{if(answered)return;answered=true;$$('.answer').forEach(x=>x.disabled=true);b.classList.add('selected');$('#feedback').textContent=q.r;$('#next').disabled=false};$('#answers').append(b)})}render();
-$('#next').onclick=()=>{if(!answered)return;if(qi<4){qi++;render()}else{$('#quiz').classList.add('hidden');$('#finish').classList.remove('hidden');burst(45)}};
-$('#restart').onclick=()=>{qi=0;$('#finish').classList.add('hidden');$('#quiz').classList.remove('hidden');render()};
-$('#hugBtn').onclick=()=>{$('#hugScene').classList.remove('hugging');void $('#hugScene').offsetWidth;$('#hugScene').classList.add('hugging');$('#hugMessage').textContent='Consider yourself hugged for as long as you need. ❤️';burst(12)};
-const modal=$('#modal');function close(){modal.classList.remove('open');modal.setAttribute('aria-hidden','true')}
-$$('.envelope').forEach(b=>b.onclick=()=>{$('#modalTitle').textContent=b.querySelector('b').textContent;$('#modalText').textContent=b.dataset.note;modal.classList.add('open');modal.setAttribute('aria-hidden','false');$('#close').focus()});$('#close').onclick=close;modal.onclick=e=>{if(e.target===modal)close()};document.onkeydown=e=>{if(e.key==='Escape')close()};
-for(let i=0;i<34;i++){let s=document.createElement('i');s.textContent='✦';s.style.cssText=`position:absolute;left:${Math.random()*100}%;top:${Math.random()*100}%;font-size:${6+Math.random()*9}px;color:#e8c6e3;opacity:${.2+Math.random()*.5};animation:twinkle ${2+Math.random()*4}s infinite`;$('#stars').append(s)}
+.btn-primary { background: #ff85a2; color: white; }
+.btn-secondary { background: white; color: #ff85a2; border: 2px solid #ff85a2; }
+.btn-huge { background: linear-gradient(45deg, #ff85a2, #ffb6c1); color: white; font-size: 1.5rem; padding: 20px 40px; }
+
+/* Animations */
+@keyframes gradientBG { 0% {background-position: 0% 50%;} 50% {background-position: 100% 50%;} 100% {background-position: 0% 50%;} }
+@keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0px); } }
+@keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+@keyframes popIn { 0% { opacity: 0; transform: scale(0.5); } 100% { opacity: 1; transform: scale(1); } }
+@keyframes fall { to { transform: translateY(100vh); opacity: 0; } }
+
+.float-anim { animation: float 3s ease-in-out infinite; }
+.pulse { animation: pulse 2s infinite; }
+.hidden { display: none !important; }
+
+/* Welcome Screen */
+#welcome-screen {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(255, 230, 234, 0.95);
+    z-index: 1000; display: flex; justify-content: center; align-items: center;
+    transition: opacity 0.5s ease;
+}
+
+/* Tiny Companion */
+#bunny-companion {
+    position: fixed; bottom: 80px; right: 20px; z-index: 100; width: 80px; height: 80px;
+}
+.bunny-widget-svg { width: 100%; height: 100%; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.1)); }
+#bunny-speech {
+    position: absolute; bottom: 90px; right: 20px; background: white; padding: 10px 15px;
+    border-radius: 20px 20px 0 20px; font-weight: bold; box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    white-space: nowrap; animation: popIn 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* Navigation */
+#navbar {
+    position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px);
+    padding: 10px 20px; border-radius: 30px; display: flex; gap: 15px;
+    z-index: 99; box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+#navbar a {
+    text-decoration: none; color: var(--text-dark); font-weight: 700;
+    font-size: 0.9rem; padding: 5px 10px; border-radius: 20px; transition: 0.3s;
+}
+#navbar a:hover { background: #ffe6ea; color: #ff6eb4; }
+
+/* Layouts */
+.mood-grid { display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; margin-top: 20px; }
+.result-bubble { margin-top: 15px; font-size: 1.2rem; font-weight: bold; color: #ff6eb4; animation: popIn 0.4s; }
+
+/* SPICY SECTION */
+.spicy-section { border-color: rgba(255, 75, 75, 0.3); box-shadow: 0 8px 32px rgba(255, 75, 75, 0.15); }
+.spicy-section h2 { color: var(--spicy-red); }
+
+.spicy-card-container {
+    perspective: 1000px;
+    width: 250px; height: 150px;
+    margin: 20px auto;
+}
+.spicy-card {
+    width: 100%; height: 100%;
+    position: relative;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+    cursor: pointer;
+}
+.spicy-card.is-flipped { transform: rotateY(180deg); }
+
+.spicy-card-front, .spicy-card-back {
+    width: 100%; height: 100%;
+    position: absolute;
+    backface-visibility: hidden;
+    border-radius: 15px;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    padding: 20px; box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+.spicy-card-front {
+    background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%);
+    color: white;
+}
+.spicy-card-front h3 { color: white; margin: 0; }
+.spicy-card-back {
+    background: white; color: var(--spicy-red);
+    transform: rotateY(180deg); border: 2px solid var(--spicy-red);
+}
+
+/* Game: Love Meter */
+.progress-bar {
+    width: 100%; height: 25px; background: #fff; border-radius: 15px;
+    margin: 15px 0; overflow: hidden; box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
+}
+#love-fill {
+    height: 100%; width: 0%;
+    background: linear-gradient(90deg, #ff9cbd, #ff69b4);
+    transition: width 1.5s cubic-bezier(0.1, 0.7, 1.0, 0.1);
+}
+
+/* Love Corner Envelopes */
+.envelope-grid { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-top:20px; }
+.envelope {
+    background: white; padding: 20px; border-radius: 10px; border-top: 20px solid #ff9cbd;
+    width: 140px; text-align: center; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    transition: 0.3s;
+}
+.envelope:hover { transform: translateY(-5px); border-top-color: #ff69b4; }
+.envelope.open { background: #ffe6ea; border-top: none; }
+
+@media (max-width: 600px) {
+    #navbar { width: 95%; flex-wrap: wrap; justify-content: center; gap: 5px; }
+    .glass-card, .glass-section { width: 95%; padding: 20px; }
+    #bunny-companion { bottom: 120px; }
+}
